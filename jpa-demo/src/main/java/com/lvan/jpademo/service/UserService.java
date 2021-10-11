@@ -28,4 +28,6 @@ public interface UserService {
     List<User> fetchAllByNameLike(String name);
 
     List<User> fetchAllByNameOrEmailLike(String name, String email);
+
+    List<User> searchUsersByCondition(Integer userId, String name, String email);
 }

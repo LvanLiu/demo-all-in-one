@@ -8,9 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -97,5 +102,30 @@ public class UserServiceImpl implements UserService {
                 .withIgnoreCase();
 
         return userRepository.findAll(Example.of(user, exampleMatcher));
+    }
+
+    @Override
+    public List<User> searchUsersByCondition(Integer userId, String name, String email) {
+
+        return userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
+
+            List<Predicate> predicates = new ArrayList<>();
+            if (Objects.nonNull(userId)) {
+                Predicate predicate = criteriaBuilder.equal(root.get("id"), userId);
+                predicates.add(predicate);
+            }
+
+            if (StringUtils.hasText(name)) {
+                Predicate predicate = criteriaBuilder.like(root.get("name"), "%" + name + "%");
+                predicates.add(predicate);
+            }
+
+            if (StringUtils.hasText(email)) {
+                Predicate predicate = criteriaBuilder.like(root.get("email"), "%" + email + "%");
+                predicates.add(predicate);
+            }
+
+            return criteriaQuery.where(predicates.toArray(new Predicate[0])).getRestriction();
+        });
     }
 }

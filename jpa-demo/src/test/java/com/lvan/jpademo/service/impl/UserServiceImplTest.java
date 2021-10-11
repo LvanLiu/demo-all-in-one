@@ -95,4 +95,12 @@ class UserServiceImplTest {
         assertThat(users).isNotNull();
         assertThat(users.size()).isGreaterThan(1);
     }
+
+    @Test
+    void searchUsersByCondition() {
+
+        List<User> users = userService.searchUsersByCondition(1, "ad", "com");
+        assertThat(users).isNotNull();
+        assertThat(users.size()).isPositive();
+    }
 }
