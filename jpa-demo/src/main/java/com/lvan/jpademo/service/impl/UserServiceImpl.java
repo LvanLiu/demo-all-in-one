@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,8 +26,10 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserRepository userRepository;
 
+    @Transactional
     @Override
     public User userRegister(User newUser) {
+
         return userRepository.save(newUser);
     }
 

@@ -2,13 +2,18 @@ package com.lvan.jpademo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author lvan
  * @date 2021/10/8
  */
+@DynamicInsert
+@DynamicUpdate
 @Getter
 @Setter
 @Entity
@@ -26,4 +31,6 @@ public class User {
 
     @Column(length = 255)
     private String email;
+
+    private Date date;
 }
