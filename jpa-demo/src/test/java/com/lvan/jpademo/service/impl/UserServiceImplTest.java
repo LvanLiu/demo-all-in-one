@@ -68,4 +68,31 @@ class UserServiceImplTest {
         assertThat(usersByPage).isNotNull();
         assertThat(usersByPage.getTotalElements()).isGreaterThan(1);
     }
+
+    @Test
+    void fetchAllByName() {
+
+        List<User> users = userService.fetchAllByName("admin");
+
+        assertThat(users).isNotNull();
+        assertThat(users.size()).isGreaterThan(1);
+    }
+
+    @Test
+    void fetchAllByNameLike() {
+
+        List<User> users = userService.fetchAllByNameLike("ad");
+
+        assertThat(users).isNotNull();
+        assertThat(users.size()).isGreaterThan(1);
+    }
+
+    @Test
+    void fetchAllByNameOrEmailLike() {
+
+        List<User> users = userService.fetchAllByNameOrEmailLike("ad", "com");
+
+        assertThat(users).isNotNull();
+        assertThat(users.size()).isGreaterThan(1);
+    }
 }

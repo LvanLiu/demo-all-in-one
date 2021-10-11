@@ -22,4 +22,10 @@ public interface UserService {
     List<User> fetchAllUsersBySortAge();
 
     Page<User> fetchUsersByPage(int pageNum, int pageSize);
+
+    List<User> fetchAllByName(String name);
+
+    List<User> fetchAllByNameLike(String name);
+
+    List<User> fetchAllByNameOrEmailLike(String name, String email);
 }

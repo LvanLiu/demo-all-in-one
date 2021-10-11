@@ -5,9 +5,7 @@ import com.lvan.jpademo.exception.NotFoundException;
 import com.lvan.jpademo.repository.UserRepository;
 import com.lvan.jpademo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +61,41 @@ public class UserServiceImpl implements UserService {
 
         PageRequest pageRequest = PageRequest.of(pageNum, pageSize);
         return userRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public List<User> fetchAllByName(String name) {
+
+        User user = new User();
+        user.setName(name);
+
+        return userRepository.findAll(Example.of(user));
+    }
+
+    @Override
+    public List<User> fetchAllByNameLike(String name) {
+
+        User user = new User();
+        user.setName(name);
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase();
+
+        return userRepository.findAll(Example.of(user, exampleMatcher));
+    }
+
+    @Override
+    public List<User> fetchAllByNameOrEmailLike(String name, String email) {
+
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matchingAny()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase();
+
+        return userRepository.findAll(Example.of(user, exampleMatcher));
     }
 }
