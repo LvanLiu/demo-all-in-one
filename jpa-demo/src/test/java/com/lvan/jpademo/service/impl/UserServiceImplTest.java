@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,5 +103,39 @@ class UserServiceImplTest {
         List<User> users = userService.searchUsersByCondition(1, "ad", "com");
         assertThat(users).isNotNull();
         assertThat(users.size()).isPositive();
+    }
+
+    @Test
+    void fetchAllByNameAndSort() {
+
+        List<User> users = userService.fetchAllByNameAndSort("admin");
+
+        assertThat(users).isNotNull();
+        assertThat(users.size()).isGreaterThan(1);
+    }
+
+    @Test
+    void pageAllByName() {
+
+        Page<User> usersByPage = userService.pageAllByName("admin", 0, 1);
+
+        assertThat(usersByPage).isNotNull();
+        assertThat(usersByPage.getTotalElements()).isGreaterThan(1);
+    }
+
+    @Test
+    void pageAllByEmail() {
+
+        Slice<User> usersByPage = userService.pageAllByEmail("xxxx@qq.com", 0, 1);
+
+        assertThat(usersByPage).isNotNull();
+    }
+
+    @Test
+    void name() {
+
+        User user = userService.fetchOldUser();
+
+        assertThat(user).isNotNull();
     }
 }

@@ -127,4 +127,31 @@ public class UserServiceImpl implements UserService {
             return criteriaQuery.where(predicates.toArray(new Predicate[0])).getRestriction();
         });
     }
+
+    @Override
+    public List<User> fetchAllByNameAndSort(String name) {
+
+        Sort sort = Sort.by("name");
+        return userRepository.findAllByName(name, sort);
+    }
+
+    @Override
+    public Page<User> pageAllByName(String name, int pageNum, int pageSize) {
+
+        PageRequest pageRequest = PageRequest.of(pageNum, pageSize);
+        return userRepository.findAllByName(name, pageRequest);
+    }
+
+    @Override
+    public Slice<User> pageAllByEmail(String email, int pageNum, int pageSize) {
+
+        PageRequest pageRequest = PageRequest.of(pageNum, pageSize);
+        return userRepository.findAllByEmail(email, pageRequest);
+    }
+
+    @Override
+    public User fetchOldUser() {
+
+        return userRepository.findFirstByOrderByAgeDesc();
+    }
 }

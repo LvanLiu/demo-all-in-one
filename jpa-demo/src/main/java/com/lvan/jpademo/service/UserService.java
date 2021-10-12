@@ -2,6 +2,7 @@ package com.lvan.jpademo.service;
 
 import com.lvan.jpademo.entity.User;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
@@ -30,4 +31,12 @@ public interface UserService {
     List<User> fetchAllByNameOrEmailLike(String name, String email);
 
     List<User> searchUsersByCondition(Integer userId, String name, String email);
+
+    List<User> fetchAllByNameAndSort(String name);
+
+    Page<User> pageAllByName(String name, int pageNum, int pageSize);
+
+    Slice<User> pageAllByEmail(String email, int pageNum, int pageSize);
+
+    User fetchOldUser();
 }
