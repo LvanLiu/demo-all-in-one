@@ -16,4 +16,6 @@ public interface DepartmentService {
     List<Department> searchByName(String name);
 
     List<Department> listAllWithSort();
+
+    Department updateDepartmentName(Integer id, String name);
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,5 +38,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> listAllWithSort() {
 
         return departmentRepository.listAllAfterSortBy("sort");
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Department updateDepartmentName(Integer id, String name) {
+        departmentRepository.update(id, name);
+        return departmentRepository.getById(id);
     }
 }
