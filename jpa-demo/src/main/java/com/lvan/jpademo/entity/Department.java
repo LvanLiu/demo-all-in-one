@@ -6,11 +6,16 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Lvan
  * @since 2021/10/13
  */
+@NamedEntityGraph(name = "Department.users", attributeNodes = {
+        @NamedAttributeNode("users")
+})
 @DynamicInsert
 @DynamicUpdate
 @Getter
@@ -29,4 +34,14 @@ public class Department {
     private String name;
 
     private Integer sort;
+
+    @Temporal(TemporalType.DATE)
+    private Date createDate;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "department_user_mapping",
+            joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<User> users;
 }

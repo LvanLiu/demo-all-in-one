@@ -1,6 +1,7 @@
 package com.lvan.jpademo.service.impl;
 
 import com.lvan.jpademo.entity.Department;
+import com.lvan.jpademo.entity.User;
 import com.lvan.jpademo.service.DepartmentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,6 +3,7 @@ package com.lvan.jpademo.repository;
 import com.lvan.jpademo.entity.Department;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,7 @@ public interface DepartmentRepository extends JpaRepositoryImplementation<Depart
     @Query(value = "select d from Department d")
     Page<Department> listAll(Pageable pageable);
 
+//    @EntityGraph(value = "Department.users")
     @Query(value = "select d from Department d where d.name like %?1")
     List<Department> listByNameLike(String name);
 
