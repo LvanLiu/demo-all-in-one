@@ -4,6 +4,7 @@ import com.lvan.jpademo.entity.Department;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +31,8 @@ public interface DepartmentRepository extends JpaRepositoryImplementation<Depart
 
     @Query(value = "select d from Department d where d.id = :id")
     Department getByDepartmentId(@Param("id") Integer id);
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query(value = "update Department d set d.name = :name where d.id = :id")
+    void update(@Param("id") Integer id, @Param("name") String name);
 }

@@ -43,4 +43,11 @@ class DepartmentServiceImplTest {
         List<Department> departments = departmentService.listAllWithSort();
         assertThat(departments).isNotNull();
     }
+
+    @Test
+    void updateDepartmentName() {
+
+        Department department = departmentService.updateDepartmentName(1, "update-test");
+        assertThat(department).isNotNull();
+    }
 }
