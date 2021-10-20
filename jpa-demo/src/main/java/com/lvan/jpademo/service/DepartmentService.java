@@ -18,4 +18,6 @@ public interface DepartmentService {
     List<Department> listAllWithSort();
 
     Department updateDepartmentName(Integer id, String name);
+
+    Department fetchDepartmentById(Integer id);
 }

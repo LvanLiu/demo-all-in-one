@@ -9,7 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Lvan
@@ -45,5 +49,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department updateDepartmentName(Integer id, String name) {
         departmentRepository.update(id, name);
         return departmentRepository.getById(id);
+    }
+
+    @Override
+    public Department fetchDepartmentById(Integer id) {
+
+        Optional<Department> departmentOptional = departmentRepository.findOne(((root, query, criteriaBuilder) -> {
+            Path<Object> objectPath = root.join("users", JoinType.LEFT).get("id");
+            Predicate predicate = criteriaBuilder.equal(objectPath, id);
+            return query.where(predicate).getRestriction();
+        }));
+        return departmentOptional.get();
     }
 }

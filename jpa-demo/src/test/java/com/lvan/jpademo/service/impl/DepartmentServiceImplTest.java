@@ -50,4 +50,12 @@ class DepartmentServiceImplTest {
         Department department = departmentService.updateDepartmentName(1, "update-test");
         assertThat(department).isNotNull();
     }
+
+    @Test
+    void fetchDepartmentById() {
+
+        Department department = departmentService.fetchDepartmentById(1);
+
+        assertThat(department).isNotNull();
+    }
 }
