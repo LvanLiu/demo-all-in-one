@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @author lvan
  * @date 2021/10/8
  */
+@Proxy(lazy = false)
 @DynamicInsert
 @DynamicUpdate
 @Getter
