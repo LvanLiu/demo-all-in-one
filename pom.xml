@@ -18,6 +18,7 @@
 
     <modules>
         <module>jpa-demo</module>
+        <module>jsr-validation-demo</module>
     </modules>
 
     <properties>
