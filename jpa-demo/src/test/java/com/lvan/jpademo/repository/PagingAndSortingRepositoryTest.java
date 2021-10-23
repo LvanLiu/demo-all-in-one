@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @since 2021/10/23
  */
 @SpringBootTest
-public class PagingAndSortingRepositoryTest {
+class PagingAndSortingRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -44,7 +44,7 @@ public class PagingAndSortingRepositoryTest {
         List<Sort.Order> orders = Sort.by(Sort.Order.desc("age")).and(Sort.Order.desc("name")).toList();
         Sort sort = Sort.by(orders);
 
-        List<User> users =  userRepository.findAll(sort);
+        List<User> users = userRepository.findAll(sort);
         assertThat(users).isNotNull();
     }
 
