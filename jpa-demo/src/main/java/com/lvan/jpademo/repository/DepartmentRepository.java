@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DepartmentRepository extends JpaRepositoryImplementation<Department, Integer> {
+
+//    @EntityGraph(value = "Department.users")
+//    List<Department> findAll();
 }

@@ -1,5 +1,6 @@
 package com.lvan.jpademo.entity;
 
+import com.lvan.jpademo.enums.GenderEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
@@ -22,6 +23,8 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
+//    @TableGenerator(name = "table_sequences", table = "table_sequences", pkColumnName = "table_name", valueColumnName = "table_id")
+//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "table_sequences")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
@@ -34,5 +37,9 @@ public class User {
     @Column(length = 255)
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    private GenderEnum gender;
+
     private Date date;
+
 }

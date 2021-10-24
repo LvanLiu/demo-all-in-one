@@ -2,10 +2,11 @@ package com.lvan.jpademo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -30,13 +31,16 @@ public class Department {
     private Integer parentId;
     private String name;
     private Integer sort;
+
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
+    @Fetch(value = FetchMode.JOIN)
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "department_user_mapping",
             joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+//    @BatchSize(size = 2)
     private List<User> users;
 }

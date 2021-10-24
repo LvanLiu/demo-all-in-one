@@ -1,6 +1,7 @@
 package com.lvan.jpademo.repository;
 
 import com.lvan.jpademo.entity.User;
+import com.lvan.jpademo.enums.GenderEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +31,7 @@ class CrudRepositoryTest {
         user.setEmail("xxxx@qq.com");
         user.setName("test");
         user.setDate(new Date());
-
+        user.setGender(GenderEnum.MALE);
         user = userRepository.save(user);
 
         assertThat(user).isNotNull();
