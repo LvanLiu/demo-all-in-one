@@ -44,4 +44,7 @@ public class Role {
 
     @LastModifiedBy
     private Integer updateBy;
+
+    @Version
+    private Integer version;
 }
