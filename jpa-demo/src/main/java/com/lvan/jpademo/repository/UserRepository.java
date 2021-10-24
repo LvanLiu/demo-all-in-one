@@ -6,6 +6,8 @@ import com.lvan.jpademo.entity.User;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -25,5 +27,7 @@ public interface UserRepository extends JpaRepositoryImplementation<User, Intege
     List<User> findTop2ByOrderByAgeDesc();
 
     Stream<User> findByAge(Integer age);
+
+    <T> Collection<T> findByDateGreaterThan(Date date, Class<T> type);
 }
 

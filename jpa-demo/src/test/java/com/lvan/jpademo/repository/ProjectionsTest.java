@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collection;
+import java.util.Date;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
@@ -37,5 +40,13 @@ class ProjectionsTest {
 
         assertThat(emailOnly.getEmail()).isNotNull();
         assertThat(emailOnly.getNameAndAge()).isNotNull();
+    }
+
+    @Test
+    void testFindByDateGreaterThan() {
+
+        Collection<UserNameDto> userNameDtos = userRepository.findByDateGreaterThan(new Date(), UserNameDto.class);
+
+        assertThat(userNameDtos).isNotNull();
     }
 }
