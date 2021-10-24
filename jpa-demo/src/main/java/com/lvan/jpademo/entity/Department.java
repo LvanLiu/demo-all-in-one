@@ -27,14 +27,9 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
-
     private Integer parentId;
-
-    @Column(length = 16)
     private String name;
-
     private Integer sort;
-
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
