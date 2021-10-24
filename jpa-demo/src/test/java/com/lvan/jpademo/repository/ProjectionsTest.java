@@ -49,4 +49,5 @@ class ProjectionsTest {
 
         assertThat(userNameDtos).isNotNull();
     }
+
 }

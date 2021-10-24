@@ -3,6 +3,9 @@ package com.lvan.jpademo.repository;
 import com.lvan.jpademo.dto.EmailOnly;
 import com.lvan.jpademo.dto.UserNameDto;
 import com.lvan.jpademo.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +32,16 @@ public interface UserRepository extends JpaRepositoryImplementation<User, Intege
     Stream<User> findByAge(Integer age);
 
     <T> Collection<T> findByDateGreaterThan(Date date, Class<T> type);
+
+    @Query("select u from User u")
+    Page<User> selectAll(Pageable pageable);
+
+    /**
+     * 注释 #pageable# 必须有。估计随着版本的变化这个会做优化。另外一种实现方法就是自己写两个查询方法，手动分页。
+     */
+    @Query(value = "select * from user /* #pageable# */",
+            countQuery = "select count(*) from user",
+            nativeQuery = true)
+    Page<User> nativeSelectAll(Pageable pageable);
 }
 
