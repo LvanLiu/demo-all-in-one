@@ -1,8 +1,13 @@
 package com.lvan.jpademo.repository;
 
+import com.lvan.jpademo.dto.EmailOnly;
+import com.lvan.jpademo.dto.UserNameDto;
 import com.lvan.jpademo.entity.User;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Lvan
@@ -11,5 +16,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepositoryImplementation<User, Integer> {
 
-    User findByName(String name);
+    UserNameDto findByEmail(String email);
+
+    EmailOnly findByName(String name);
+
+    User findFirstByOrderByAgeDesc();
+
+    List<User> findTop2ByOrderByAgeDesc();
+
+    Stream<User> findByAge(Integer age);
 }
+
