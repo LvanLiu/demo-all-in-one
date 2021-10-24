@@ -5,8 +5,10 @@ import com.lvan.jpademo.dto.UserNameDto;
 import com.lvan.jpademo.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -43,5 +45,17 @@ public interface UserRepository extends JpaRepositoryImplementation<User, Intege
             countQuery = "select count(*) from user",
             nativeQuery = true)
     Page<User> nativeSelectAll(Pageable pageable);
+
+    @Modifying
+    @Query(value = "update User u set u.name = :name where u.id = :id")
+    void update(@Param("id") Integer id, @Param("name") String name);
+
+    @Modifying(clearAutomatically = true)
+    @Query(value = "update User u set u.name = :name where u.id = :id")
+    void updateAndClear(@Param("id") Integer id, @Param("name") String name);
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query(value = "update User u set u.name = :name where u.id = :id")
+    void updateAndClearAndFlush(@Param("id") Integer id, @Param("name") String name);
 }
 
