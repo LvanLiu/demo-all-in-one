@@ -20,6 +20,7 @@
         <module>jpa-demo</module>
         <module>jsr-validation-demo</module>
         <module>concurrent-demo</module>
+        <module>mapstruct-demo</module>
     </modules>
 
     <properties>
