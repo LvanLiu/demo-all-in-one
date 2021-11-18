@@ -57,5 +57,7 @@ public interface UserRepository extends JpaRepositoryImplementation<User, Intege
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query(value = "update User u set u.name = :name where u.id = :id")
     void updateAndClearAndFlush(@Param("id") Integer id, @Param("name") String name);
+
+    void deleteByName(@Param("name") String name);
 }
 

@@ -84,4 +84,10 @@ class JpaRepositoryTest {
 
         userRepository.deleteAllByIdInBatch(ids);
     }
+
+    @Test
+    void testDeleteByName() {
+
+        userRepository.deleteByName("test");
+    }
 }
