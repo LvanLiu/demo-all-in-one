@@ -1,10 +1,10 @@
-package com.lvan.webdemo;
+package com.lvan.httpclientdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebDemoApplicationTests {
+class HttpClientDemoApplicationTests {
 
     @Test
     void contextLoads() {
