@@ -18,11 +18,11 @@ public class MockServerController {
     @RequestMapping("world")
     public String getWorld() {
         log.info("get world");
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         return "hello world";
     }
 }
