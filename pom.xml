@@ -22,6 +22,7 @@
         <module>concurrent-demo</module>
         <module>mapstruct-demo</module>
         <module>web-demo</module>
+        <module>prometheus-demo</module>
     </modules>
 
     <properties>
