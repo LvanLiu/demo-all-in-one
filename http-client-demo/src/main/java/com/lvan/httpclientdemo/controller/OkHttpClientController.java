@@ -6,6 +6,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +30,8 @@ public class OkHttpClientController {
         this.retryTemplate = retryTemplate;
     }
 
-    @RequestMapping("hello")
-    public String get() throws IOException {
+    @GetMapping("hello")
+    public String helloWorld() throws IOException {
         Request request = new Request.Builder()
                 .url("http://localhost:9999/world")
                 .build();
@@ -40,6 +41,5 @@ public class OkHttpClientController {
             ResponseBody responseBody = response.body();
             return responseBody.string();
         });
-
     }
 }

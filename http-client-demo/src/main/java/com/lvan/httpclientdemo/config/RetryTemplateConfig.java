@@ -1,5 +1,6 @@
 package com.lvan.httpclientdemo.config;
 
+import com.dtflys.forest.exceptions.ForestRuntimeException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.RetryPolicy;
@@ -11,6 +12,7 @@ import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,7 @@ public class RetryTemplateConfig {
         Map<Class<? extends Throwable>, RetryPolicy> map = new HashMap<>();
         map.put(Exception.class, new NeverRetryPolicy());
         map.put(IOException.class, simpleRetryPolicy());
+        map.put(ForestRuntimeException.class, simpleRetryPolicy());
 
         ExceptionClassifierRetryPolicy classifierRetryPolicy = new ExceptionClassifierRetryPolicy();
         classifierRetryPolicy.setPolicyMap(map);
