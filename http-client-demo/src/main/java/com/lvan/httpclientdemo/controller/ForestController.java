@@ -1,6 +1,7 @@
 package com.lvan.httpclientdemo.controller;
 
 import com.lvan.httpclientdemo.client.HelloWorldClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class ForestController {
         this.retryTemplate = retryTemplate;
     }
 
+    @HystrixCommand
     @GetMapping("hello")
     public String helloWorld() {
        return retryTemplate.execute(context -> helloWorldClient.getWorld());
