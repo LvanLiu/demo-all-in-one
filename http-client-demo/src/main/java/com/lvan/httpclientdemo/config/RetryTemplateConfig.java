@@ -12,7 +12,6 @@ import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public class RetryTemplateConfig {
 
         //设置退避策略
         retryTemplate.setBackOffPolicy(exponentialBackOffPolicy());
-        retryTemplate.setRetryPolicy(exceptionClassifierRetryPolicy());
+        retryTemplate.setRetryPolicy(simpleRetryPolicy());
 
         return retryTemplate;
     }
@@ -40,9 +39,11 @@ public class RetryTemplateConfig {
      */
     private RetryPolicy simpleRetryPolicy() {
 
-        SimpleRetryPolicy simpleRetryPolicy = new SimpleRetryPolicy();
-        simpleRetryPolicy.setMaxAttempts(3);
-        return simpleRetryPolicy;
+        Map<Class<? extends Throwable>, Boolean> retryableExceptions = new HashMap<>(4);
+        retryableExceptions.put(IOException.class, true);
+        retryableExceptions.put(ForestRuntimeException.class, true);
+
+        return new SimpleRetryPolicy(2, retryableExceptions);
     }
 
     /**

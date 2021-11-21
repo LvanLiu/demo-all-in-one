@@ -1,6 +1,7 @@
 package com.lvan.httpclientdemo.client;
 
 import com.dtflys.forest.annotation.Request;
+import com.lvan.httpclientdemo.interceptor.ForestMetricsEventInterceptor;
 
 /**
  * @author Lvan
@@ -8,6 +9,6 @@ import com.dtflys.forest.annotation.Request;
  */
 public interface HelloWorldClient {
 
-    @Request(url = "http://localhost:9999/world")
+    @Request(url = "http://localhost:9999/world", interceptor = ForestMetricsEventInterceptor.class)
     String getWorld();
 }

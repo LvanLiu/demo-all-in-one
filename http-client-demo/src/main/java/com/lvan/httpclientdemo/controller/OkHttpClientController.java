@@ -1,5 +1,6 @@
 package com.lvan.httpclientdemo.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,6 +31,7 @@ public class OkHttpClientController {
         this.retryTemplate = retryTemplate;
     }
 
+    @HystrixCommand(fallbackMethod = "fallback")
     @GetMapping("hello")
     public String helloWorld() throws IOException {
         Request request = new Request.Builder()
@@ -37,9 +39,14 @@ public class OkHttpClientController {
                 .build();
 
         return retryTemplate.execute(context -> {
+            log.info("重试次数:{}", context.getRetryCount());
             Response response = okHttpClient.newCall(request).execute();
             ResponseBody responseBody = response.body();
             return responseBody.string();
         });
+    }
+
+    public String fallback() {
+        return "error fallback";
     }
 }
