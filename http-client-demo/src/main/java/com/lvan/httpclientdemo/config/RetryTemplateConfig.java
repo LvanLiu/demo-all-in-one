@@ -43,7 +43,7 @@ public class RetryTemplateConfig {
         retryableExceptions.put(IOException.class, true);
         retryableExceptions.put(ForestRuntimeException.class, true);
 
-        return new SimpleRetryPolicy(2, retryableExceptions);
+        return new SimpleRetryPolicy(3, retryableExceptions);
     }
 
     /**

@@ -38,12 +38,9 @@ public class OkHttpClientController {
                 .url("http://localhost:9999/world")
                 .build();
 
-        return retryTemplate.execute(context -> {
-            log.info("重试次数:{}", context.getRetryCount());
-            Response response = okHttpClient.newCall(request).execute();
-            ResponseBody responseBody = response.body();
-            return responseBody.string();
-        });
+        Response response = okHttpClient.newCall(request).execute();
+        ResponseBody responseBody = response.body();
+        return responseBody.string();
     }
 
     public String fallback() {
