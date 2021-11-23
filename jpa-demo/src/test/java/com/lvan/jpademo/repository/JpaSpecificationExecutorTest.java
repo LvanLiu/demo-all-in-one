@@ -36,7 +36,7 @@ class JpaSpecificationExecutorTest {
         Date endDate = new Date();
         int userId = 1;
 
-        departmentRepository.findAll(((root, query, criteriaBuilder) -> {
+        List<Department> departments = departmentRepository.findAll(((root, query, criteriaBuilder) -> {
             //用来缓存多个条件
             List<Predicate> predicates = new ArrayList<>();
 
