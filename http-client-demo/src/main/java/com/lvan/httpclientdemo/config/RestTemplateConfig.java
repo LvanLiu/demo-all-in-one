@@ -1,10 +1,12 @@
 package com.lvan.httpclientdemo.config;
 
+import com.lvan.httpclientdemo.interceptor.RestTemplateRetryInterceptor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.time.Duration;
 
@@ -20,11 +22,12 @@ public class RestTemplateConfig {
      * 这里使用RestTemplateBuilder来设置连接超时时间、以及读超时时间，
      * 这里给一个很小的值，以测试超时的情况，因为要测试超时重试。
      */
-    @LoadBalanced
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    public RestTemplate restTemplate(RestTemplateBuilder builder, RetryTemplate retryTemplate) {
         return builder.setConnectTimeout(Duration.ofSeconds(1))
                 .setReadTimeout(Duration.ofSeconds(1))
+                .additionalInterceptors(new RestTemplateRetryInterceptor(retryTemplate))
+                .uriTemplateHandler(new DefaultUriBuilderFactory("http://localhost:9999"))
                 .build();
     }
 }

@@ -35,12 +35,11 @@ public class Department {
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
-    @Fetch(value = FetchMode.JOIN)
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "department_user_mapping",
             joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-//    @BatchSize(size = 2)
+//    @BatchSize(size = 3)
     private List<User> users;
 }

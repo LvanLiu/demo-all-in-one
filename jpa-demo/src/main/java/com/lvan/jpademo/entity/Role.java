@@ -11,7 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author Lvan
@@ -34,10 +34,10 @@ public class Role {
     private String name;
 
     @CreatedDate
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @LastModifiedDate
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @CreatedBy
     private Integer createBy;

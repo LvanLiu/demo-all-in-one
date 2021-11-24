@@ -24,7 +24,7 @@ public class RestTemplateController {
     @RequestMapping("hello")
     public String hello() {
 
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://mock-server/world", String.class);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("/world", String.class);
         return responseEntity.getBody();
     }
 

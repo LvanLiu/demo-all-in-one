@@ -1,6 +1,8 @@
 package com.lvan.httpclientdemo.config;
 
 import com.dtflys.forest.exceptions.ForestRuntimeException;
+import lombok.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.RetryPolicy;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Configuration
 public class RetryTemplateConfig {
 
+
     @Bean
     public RetryTemplate retryTemplate() {
 
@@ -30,6 +33,7 @@ public class RetryTemplateConfig {
         //设置退避策略
         retryTemplate.setBackOffPolicy(exponentialBackOffPolicy());
         retryTemplate.setRetryPolicy(simpleRetryPolicy());
+        retryTemplate.setThrowLastExceptionOnExhausted(true);
 
         return retryTemplate;
     }
