@@ -1,5 +1,6 @@
 package com.lvan.mapstructdemo.convert;
 
+import com.lvan.mapstructdemo.annotation.ToPersistEntity;
 import com.lvan.mapstructdemo.dto.UserDTO;
 import com.lvan.mapstructdemo.model.User;
 import org.mapstruct.Mapper;
@@ -17,5 +18,8 @@ public interface UserConvert {
      */
     UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);
 
-    UserDTO convert(User user);
+    UserDTO toUserDTO(User user);
+
+    @ToPersistEntity
+    User toPersistUser(UserDTO userDTO);
 }

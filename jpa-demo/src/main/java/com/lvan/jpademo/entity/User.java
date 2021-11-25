@@ -14,7 +14,7 @@ import java.util.Date;
  * @author lvan
  * @date 2021/10/8
  */
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 @DynamicInsert
 @DynamicUpdate
 @Getter

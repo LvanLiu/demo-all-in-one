@@ -41,7 +41,9 @@ class PagingAndSortingRepositoryTest {
         //方式2
 //        Sort sort = Sort.by(Sort.Direction.DESC, "age", "name");
         //方式3
-        List<Sort.Order> orders = Sort.by(Sort.Order.desc("age")).and(Sort.Order.desc("name")).toList();
+        List<Sort.Order> orders = Sort
+                .by(Sort.Order.asc("age"))
+                .and(Sort.Order.desc("name")).toList();
         Sort sort = Sort.by(orders);
 
         List<User> users = userRepository.findAll(sort);

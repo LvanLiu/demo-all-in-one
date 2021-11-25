@@ -1,8 +1,11 @@
 package com.lvan.jpademo.repository;
 
 import com.lvan.jpademo.entity.Department;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Lvan
@@ -11,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DepartmentRepository extends JpaRepositoryImplementation<Department, Integer> {
 
-//    @EntityGraph(value = "Department.users")
-//    List<Department> findAll();
+    @EntityGraph(value = "Department.users")
+    List<Department> findAll();
 }

@@ -72,7 +72,7 @@ class QueryTest {
         log.info(user.getName());
 
         Department department = departmentRepository.getById(1);
-        department.setName("test modify");
+        department.setName("lvan test");
         departmentRepository.save(department);
 
         userRepository.updateAndClear(1, "lvan");
@@ -94,7 +94,7 @@ class QueryTest {
         log.info(user.getName());
 
         Department department = departmentRepository.getById(1);
-        department.setName("test modify");
+        department.setName("lvan test");
         departmentRepository.save(department);
 
         userRepository.updateAndClearAndFlush(1, "lvan");

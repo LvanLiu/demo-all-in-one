@@ -69,6 +69,7 @@ class JpaRepositoryTest {
         int nowAge = orgAge + 1;
         user.setAge(nowAge);
 
+//        userRepository.save(user);
         userRepository.saveAndFlush(user);
 
         assertThat(user).isNotNull();
