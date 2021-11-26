@@ -37,4 +37,30 @@ class UserConvertTest {
         assertThat(user.getId()).isNull();
         assertThat(user.getUsername()).isEqualTo("test");
     }
+
+    @Test
+    void toPersistUser_whenAutoSetterTime_thenSuccess() {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("test");
+
+        User user = UserConvert.INSTANCE.toPersistUser2(userDTO);
+
+        assertThat(user).isNotNull();
+        assertThat(user.getCreateTime()).isNotNull();
+        assertThat(user.getUpdateTime()).isNotNull();
+        assertThat(user.getId()).isNull();
+        assertThat(user.getUsername()).isEqualTo("test");
+    }
+
+    @Test
+    void toUserDTO_whenCopyUserType_thenSuccessConvert() {
+
+        User user = new User();
+        user.setType("type");
+
+        UserDTO userDTO = UserConvert.INSTANCE.toUserDTO(user);
+
+        assertThat(userDTO.getUserType()).isEqualTo(user.getType());
+    }
 }
