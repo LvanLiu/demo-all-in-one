@@ -20,7 +20,7 @@ public class RestTemplateController {
         this.restTemplate = restTemplate;
     }
 
-    @HystrixCommand(fallbackMethod = "fallback")
+    @HystrixCommand
     @RequestMapping("hello")
     public String hello() {
 

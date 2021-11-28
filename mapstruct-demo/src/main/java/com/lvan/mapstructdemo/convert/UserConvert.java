@@ -19,12 +19,10 @@ public interface UserConvert {
      */
     UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);
 
+    @Mapping(source = "user.address.street", target = "street")
     @Mapping(source = "type", target = "userType")
     UserDTO toUserDTO(User user);
 
     @ToPersistEntity
     User toPersistUser(UserDTO userDTO);
-
-    @Mapping(target = "id", ignore = true)
-    User toPersistUser2(UserDTO userDTO);
 }

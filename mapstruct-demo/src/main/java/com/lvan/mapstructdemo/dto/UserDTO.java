@@ -11,5 +11,7 @@ public class UserDTO {
 
     private Integer id;
     private String username;
+    private String name;
     private String userType;
+    private String street;
 }
