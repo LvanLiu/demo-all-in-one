@@ -23,5 +23,6 @@ public class User {
     @Data
     public static class Address {
         private String street;
+        private String city;
     }
 }

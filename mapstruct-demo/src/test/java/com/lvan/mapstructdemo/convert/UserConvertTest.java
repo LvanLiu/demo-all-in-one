@@ -3,6 +3,9 @@ package com.lvan.mapstructdemo.convert;
 import com.lvan.mapstructdemo.dto.UserDTO;
 import com.lvan.mapstructdemo.model.User;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author lvan
  * @date 2021/11/9
  */
+@SpringBootTest
 class UserConvertTest {
+
+    @Resource
+    private UserConvert userConvert;
 
     /**
      * 测试属性简单转换
@@ -72,5 +79,19 @@ class UserConvertTest {
         UserDTO userDTO = UserConvert.INSTANCE.toUserDTO(user);
 
         assertThat(userDTO.getStreet()).isEqualTo(address.getStreet());
+    }
+
+    @Test
+    void testMappingTarget() {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("new name");
+
+        User user = new User();
+        user.setUsername("old name");
+
+        UserConvert.INSTANCE.updateUser(userDTO, user);
+
+        assertThat(user.getUsername()).isEqualTo(userDTO.getUsername());
     }
 }
