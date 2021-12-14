@@ -1,5 +1,6 @@
 package com.lvan.mapstructdemo.convert;
 
+import com.lvan.mapstructdemo.dto.AddressDTO;
 import com.lvan.mapstructdemo.dto.UserDTO;
 import com.lvan.mapstructdemo.model.User;
 import org.junit.jupiter.api.Test;
@@ -93,5 +94,20 @@ class UserConvertTest {
         UserConvert.INSTANCE.updateUser(userDTO, user);
 
         assertThat(user.getUsername()).isEqualTo(userDTO.getUsername());
+    }
+
+    @Test
+    void testMappingWithMultipleParams() {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("new name");
+
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setStreet("street");
+        addressDTO.setCity("city");
+
+        User user = UserConvert.INSTANCE.convert(userDTO, addressDTO);
+
+        assertThat(user.getAddress().getStreet()).isNotEmpty();
     }
 }
